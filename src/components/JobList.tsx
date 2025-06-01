@@ -1,8 +1,9 @@
 import React from 'react'
+import { useState } from 'react'
 
 type Props = {
     job: {
-        id: number,
+        id: string,
         type: string,
         title: string,
         salary: string,
@@ -17,7 +18,16 @@ type Props = {
     }
 }
 
+
+
 const JobList = ({job} : Props) => {
+    const [showFullDescription, setShowFullDescription] = useState(false)
+    let description = job.description
+
+    if (!showFullDescription) {
+        description = description.substring(0, 90) + '...'
+    }
+
     return (
         <div className="bg-white rounded-xl shadow-md relative">
             <div className="p-4">
@@ -27,7 +37,10 @@ const JobList = ({job} : Props) => {
                 </div>
 
                 <div className="mb-5">
-                    {job.description}
+                    {description}
+                    <span onClick={() => setShowFullDescription((prevState) => !prevState)} className='text-indigo-600 underline cursor-pointer ms-1'>
+                        { showFullDescription ? 'See less' : 'See more' }
+                    </span>
                 </div>
 
                 <h3 className="text-indigo-500 mb-2">{job.salary}</h3>
