@@ -1,14 +1,10 @@
-import React from 'react'
-import NavBar from './components/NavBar'
-import Hero from './components/Hero'
-import Cards from './components/Cards'
-import JobListings from './components/JobListings'
-import ViewAllJobs from './components/ViewAllJobs'
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import MainLayout from './MainLayout'
 import JobsPage from './pages/JobsPage'
 import NotFound from './pages/NotFound'
+import JobPage, { jobLoaderData } from './pages/JobPage'
+import AddJobPage from './pages/AddJobPage'
 
 const App = () => {
 
@@ -18,6 +14,8 @@ const App = () => {
         <Route index element={<HomePage />} />
         <Route path='/jobs' element={<JobsPage />} />
         <Route path='*' element={<NotFound />} />
+        <Route path='/jobs/:id' element={<JobPage />} loader={jobLoaderData} />
+        <Route path='/add-job' element={<AddJobPage />} />
       </Route>
     )
   )
